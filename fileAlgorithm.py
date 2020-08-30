@@ -10,8 +10,6 @@ lr = LinearRegression().fit(X_train, y_train)
 being able to predict correctly to avoid overfitting) - increase alpha means increase in generalization, decrease in training accuracy'''
 
 from sklearn.linear_model import Ridge
-X, y = mglearn.datasets.make_wave(n_samples=60)
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
 
 ridge = Ridge(alpha=1.0).fit(X_train, y_train)
 
@@ -19,8 +17,6 @@ ridge = Ridge(alpha=1.0).fit(X_train, y_train)
 An increase in alpha would be an increase in amount of feautures used'''
 
 from sklearn.linear_model import Lasso
-X, y = mglearn.datasets.make_wave(n_samples=60)
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
 
 lasso = Lasso(alpha=0.01, max_iter=100000).fit(X_train, y_train)
 
