@@ -31,7 +31,7 @@ from sklearn.tree import DecisionTreeClassifier
 
 tr = DecisionTreeClassifier(max_depth=4,random_state=0).fit(X_train, y_train)
 
-#Random Forest/RandomForestClassifier(the more n_estimators, the more trees in the voting process
+#Random Forest/RandomForestClassifier(the more n_estimators, the more trees in the voting process)
 
 from sklearn.ensemble import RandomForestClassifier
 
