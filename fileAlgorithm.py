@@ -30,3 +30,9 @@ logreg = LogisticRegression(C=1,max_iter=10000,penalty="l2").fit(X_train, y_trai
 from sklearn.tree import DecisionTreeClassifier
 
 tr = DecisionTreeClassifier(max_depth=4,random_state=0).fit(X_train, y_train)
+
+#Random Forest/RandomForestClassifier(the more n_estimators, the more trees in the voting process
+
+from sklearn.ensemble import RandomForestClassifier
+
+forest = RandomForestClassifier(n_estimators=10,random_state=0).fit(X_train, y_train)
