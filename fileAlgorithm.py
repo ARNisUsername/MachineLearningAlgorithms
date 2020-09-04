@@ -38,6 +38,7 @@ from sklearn.ensemble import RandomForestClassifier
 forest = RandomForestClassifier(n_estimators=10,random_state=0).fit(X_train, y_train)
 
 #Gradiatent Boosted Regression Trees(USED VERY OFTEN IN MACHINE LEARNING COMPETITIONS) Builds trees where each tree tries to correct the mistakes of the previous one
+#Does not work well with high dimensional sparse data(data with a lot of elements and a lot of 0's)
 
 from sklearn.ensemble import GradientBoostingClassifier
 
