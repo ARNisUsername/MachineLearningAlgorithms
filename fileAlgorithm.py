@@ -31,8 +31,14 @@ from sklearn.tree import DecisionTreeClassifier
 
 tr = DecisionTreeClassifier(max_depth=4,random_state=0).fit(X_train, y_train)
 
-#Random Forest/RandomForestClassifier(the more n_estimators, the more trees in the voting process)
+#Random Forest/RandomForestClassifier(the more n_estimators, the more trees in the voting process, You should have as much trees as possible to make the voting more accurate)
 
 from sklearn.ensemble import RandomForestClassifier
 
 forest = RandomForestClassifier(n_estimators=10,random_state=0).fit(X_train, y_train)
+
+#Gradiatent Boosted Regression Trees(USED VERY OFTEN IN MACHINE LEARNING COMPETITIONS) Builds trees where each tree tries to correct the mistakes of the previous one
+
+from sklearn.ensemble import GradientBoostingClassifier
+
+gbrt = GradientBoostingClassifier(random_state=0).fit(X_train, y_train)
