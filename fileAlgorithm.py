@@ -39,7 +39,9 @@ forest = RandomForestClassifier(n_estimators=10,random_state=0).fit(X_train, y_t
 
 #Gradiatent Boosted Regression Trees(USED VERY OFTEN IN MACHINE LEARNING COMPETITIONS) Builds trees where each tree tries to correct the mistakes of the previous one
 #Does not work well with high dimensional sparse data(data with a lot of elements and a lot of 0's)
+#Learning rate: Higher means trees try stronger to correct other mistakes
+#Max depth: Lower means lower compexity of the tree, low max_depth for gradient boosted models
 
 from sklearn.ensemble import GradientBoostingClassifier
 
-gbrt = GradientBoostingClassifier(random_state=0).fit(X_train, y_train)
+gbrt = GradientBoostingClassifier(random_state=0,max_depth=3,learning_rate=0.1).fit(X_train, y_train)
