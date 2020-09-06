@@ -1,3 +1,8 @@
+#KNeighborsClassifier:
+
+from sklearn.neighbors import KNeighborsClassifier
+knn = KNeighborsClassifier(n_neighbors=3).fit(X_train, y_train)
+
 #Linear Regression:
 
 from sklearn.linear_model import LinearRegression
