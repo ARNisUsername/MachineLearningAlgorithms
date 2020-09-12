@@ -73,3 +73,7 @@ X_train_scaled = (X_train - min_on_training) / range_on_training
 X_test_scaled = (X_test - min_on_training) / range_on_training
 #calculate svm
 svm = SVC(kernel='rbf',C=10,gamma=0.1).fit(X_train_scaled, y_train)
+
+#Neural networks: Reduces the number of nodes([12,12] has 12 nodes) reduces complexity, increasing it increases the complexity
+from sklearn.neural_network import MLPClassifier
+mlp = MLPClassifier(solver='lbfgs', random_state=0, hidden_layer_sizes=[10,10])
