@@ -76,4 +76,4 @@ svm = SVC(kernel='rbf',C=10,gamma=0.1).fit(X_train_scaled, y_train)
 
 #Neural networks: Reduces the number of nodes([12,12] has 12 nodes) reduces complexity, increasing it increases the complexity
 from sklearn.neural_network import MLPClassifier
-mlp = MLPClassifier(solver='lbfgs', random_state=0, hidden_layer_sizes=[10,10])
+mlp = MLPClassifier(solver='lbfgs', random_state=0, hidden_layer_sizes=[10,10]).fit(X_train, y_train)
