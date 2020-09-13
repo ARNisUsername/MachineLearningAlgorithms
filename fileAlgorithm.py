@@ -34,6 +34,7 @@ lasso = Lasso(alpha=0.01, max_iter=100000).fit(X_train, y_train)
 #Logistic Regression(One type of linear model used for classification; L2 Regularization by default)
 #The higher C is, the increased complexity of the model(which makes the predictory better in most cases)
 
+from sklearn.linear_model import LogisticRegression
 logreg = LogisticRegression(C=1,max_iter=10000,penalty="l2").fit(X_train, y_train)
 
 #Decision Tree(greater the depth, the more overfitting)
