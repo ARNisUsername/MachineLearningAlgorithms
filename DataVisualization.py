@@ -2,6 +2,7 @@
 
 #Subplots
 import matplotlib.pyplot as plt
+import numpy as np
 
 fig, ax = plt.subplots(nrows=1, ncols=2)
 
@@ -18,6 +19,7 @@ plt.show()
 
 #Two plot in same plot
 import matplotlib.pyplot as plt
+import numpy as np
 
 fig = plt.figure()
 ax1 = fig.add_axes([0.1,0.1,0.9,0.9]) #[how much away from left, how amount away from bottom, length, width]
