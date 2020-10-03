@@ -45,7 +45,7 @@ sns.jointplot(x='total_bill', y='tip', data=tips)
 plt.show()
 
 #Pair Plot(uses whole dataset to create all types of plots)
-sns.pairplot(tips)
+sns.pairplot(tips, hue='sex')
 plt.show()
 
 #Bar plot(Can put x as a non-integer num)
