@@ -31,4 +31,20 @@ plt.show()
 #-------------SEABORN------------
 
 import seaborn as sns
+import matplotlib.pyplot as plt
+
 tips = sns.load_dataset('tips')
+plt.rcParams["patch.force_edgecolor"] = True #Declared True so Histogram plots have edge lines
+
+#Distribution Plot
+sns.distplot(tips['total_bill'])
+plt.show()
+
+#Joint Plot(uses x and y to create 2 types of plots in one)
+
+sns.jointplot(x='total_bill', y='tips', data=tips)
+plt.show()
+
+#Pair Plot(uses whole dataset to create all types of plots)
+sns.pairplot(tips)
+plt.show()
