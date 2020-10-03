@@ -44,7 +44,7 @@ plt.show()
 sns.jointplot(x='total_bill', y='tip', data=tips)
 plt.show()
 
-#Pair Plot(uses whole dataset to create all types of plots)
+#Pair Plot(uses whole dataset to create all types of plots) hue colors the plots
 sns.pairplot(tips, hue='sex')
 plt.show()
 
