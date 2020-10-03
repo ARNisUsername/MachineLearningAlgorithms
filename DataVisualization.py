@@ -48,6 +48,6 @@ plt.show()
 sns.pairplot(tips, hue='sex')
 plt.show()
 
-#Bar plot(Can put x as a non-integer num)
+#Bar plot(Can put x as a non-integer)
 sns.barplot(x='sex', y='tip', data=tips)
 plt.show()
