@@ -41,7 +41,6 @@ sns.distplot(tips['total_bill'])
 plt.show()
 
 #Joint Plot(uses x and y to create 2 types of plots in one)
-
 sns.jointplot(x='total_bill', y='tips', data=tips)
 plt.show()
 
