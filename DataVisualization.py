@@ -62,4 +62,10 @@ fp = flights.pivot_table(index='month', columns='year', value='passangers') #Mon
 sns.heatmap(fp, cmap='magma_r', linecolor='black', linewidth=1) #Lines are the lines in between every square in the heat map
 plt.show()
 
+#Line of Best Fit with dots Plot
+sns.lmplot(x='total_bill', y='tip', data=tips, hue='sex')
+plt.show()
+
+
+            
 
