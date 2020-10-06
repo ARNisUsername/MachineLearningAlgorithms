@@ -34,6 +34,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 tips = sns.load_dataset('tips')
+flights = sns.load_dataset('flights')
 plt.rcParams["patch.force_edgecolor"] = True #Declared True so Histogram plots have edge lines
 
 #Distribution Plot
@@ -51,3 +52,14 @@ plt.show()
 #Bar plot(Can put x as a non-integer)
 sns.barplot(x='sex', y='tip', data=tips)
 plt.show()
+
+#Box plot(can put x as a non-integer)
+sns.boxplot(x='day', y='total_bill', data=tips, hue='sex')
+plt.show()
+
+#Heat map
+fp = flights.pivot_table(index='month', columns='year', value='passangers') #Month on side, year on bottom, value of each square is # of passengers
+sns.heatmap(fp, cmap='magma_r', linecolor='black', linewidth=1) #Lines are the lines in between every square in the heat map
+plt.show()
+
+
