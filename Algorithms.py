@@ -1,5 +1,5 @@
 
-#Make mglearn wave(Not Machine Learning, just useful for future reference
+#Make mglearn wave(Not Machine Learning, just useful for future reference)
 import mglearn
 from sklearn.model_selection import train_test_split
 X, y = mglearn.datasets.make_wave(n_samples=60)
@@ -78,3 +78,12 @@ svm = SVC(kernel='rbf',C=10,gamma=0.1).fit(X_train_scaled, y_train)
 #Neural networks: Reduces the number of nodes([12,12] has 12 nodes) reduces complexity, increasing it increases the complexity
 from sklearn.neural_network import MLPClassifier
 mlp = MLPClassifier(solver='lbfgs', random_state=0, hidden_layer_sizes=[10,10]).fit(X_train, y_train)
+
+#Grid Search CV(Perfect for finding what parameters to put for your specific model!)
+from sklearn.model_selection import GridSearchCV
+from sklearn.neighbors import KNeighborsClassifier
+param_grid = {'n_neighbors':[1,2,3,4,5,6,7,8,9]}
+grid = GridSearchCV(KNeighborsClassifier(),param_grid,verbose=3)
+print(grid.best_params_)
+model = grid.fit(X_train, y_train)
+
