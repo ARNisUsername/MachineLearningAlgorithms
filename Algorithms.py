@@ -87,3 +87,18 @@ grid = GridSearchCV(KNeighborsClassifier(),param_grid,verbose=3)
 print(grid.best_params_)
 model = grid.fit(X_train, y_train)
 
+#K Means Cluserting 
+from sklearn.model_selection import make_blobs
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+data = make_blobs(n_samples=150,n_features=2,centers=4,cluster_std=1.8,random_state=0)
+kmeans = KMeans(n_clusters=4)
+model = kmeans.fit(data[0])
+
+fig, axes = plt.subplots(1,2)
+axes[0].scatter(data[0][:,0],data[0][:,1],c=data[1])
+axes[0].set_title('Original')
+axes[1].scatter(data[0][:,0],data[0][:,1],c=model.labels_)
+axes[1].set_title('K Means')
+plt.show()
+
