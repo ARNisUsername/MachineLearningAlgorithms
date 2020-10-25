@@ -102,3 +102,11 @@ axes[1].scatter(data[0][:,0],data[0][:,1],c=model.labels_)
 axes[1].set_title('K Means')
 plt.show()
 
+#MinMaxScaler(scales data, very common for neural networks
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+scaler.fit(X_train)
+X_train = scaler.transform(X_train)
+scaler.fit(X_test)
+X_test = scaler.transform(X_test)
+
