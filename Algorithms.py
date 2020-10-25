@@ -110,3 +110,13 @@ X_train = scaler.transform(X_train)
 scaler.fit(X_test)
 X_test = scaler.transform(X_test)
 
+#Tensorflow neural network
+import tensorflow as tf
+from tensorflow import keras
+
+model = keras.Sequential()
+model.add(keras.layers.Dense(11, activation='relu'))
+model.add(keras.layers.Dense(11, activation='relu'))
+model.add(keras.layers.Dense(1))
+model.compile(optimizer='adam',loss='mse')
+model.fit(X_train, y_train)
