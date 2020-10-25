@@ -2,15 +2,15 @@ import numpy as np
 
 #Function for getting r(important for calculating the slope of regression line)
 def get_r(x_array, y_array):
-  numerator = 0
-  dem1 = 0
+	numerator = 0
+	dem1 = 0
 	dem2 = 0
 	for i in range(len(x_array)):
 		numerator += (x_array[i] - np.mean(x_array)) * (y_array[i] - np.mean(y_array))
 		dem1 += (x_array[i] - np.mean(x_array))**2
 		dem2 += (y_array[i] - np.mean(y_array))**2
 	denom = np.sqrt(dem1 * dem2)
-  return numerator / denom
+	return numerator / denom
 
 #Function for calulcating the slope of the regression line
 def calculate_slope(x_array, y_array):
