@@ -1,1 +1,2 @@
-This is a file filled with machine learning algorithms which I manually made(along with some math explanations)
+This is a file filled with machine learning algorithms which I manually made
+I decided to manually make these algorithms to showcase that I understand the math behind how these algorithms work
