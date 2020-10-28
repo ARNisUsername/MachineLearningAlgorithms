@@ -24,11 +24,6 @@ def countInstances(theList):
         theDict[i] += 1
     return theDict
 
-
-
-
-#print(convertDif(list(newKey.split()),'int'))
-
 def output_dict(x_array, y_array):
     info = {}
     for i in range(len(x_array)):
