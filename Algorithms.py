@@ -108,13 +108,21 @@ scaler = MinMaxScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
-#Tensorflow neural network
+#---------------TENSORFLOW NEURAL NETWORK--------
 import tensorflow as tf
 from tensorflow import keras
+import matplotlib.pyplot as plt
+import pandas as pd
 
 model = keras.Sequential()
 model.add(keras.layers.Dense(11, activation='relu'))
 model.add(keras.layers.Dense(11, activation='relu'))
+model.add(keras.layers.Dropout(0.2))
 model.add(keras.layers.Dense(1))
 model.compile(optimizer='adam',loss='mse')
-model.fit(X_train, y_train)
+stopping = keras.callbacks.EarlyStopping(monitor='val_loss',mode='min', verbose=1, patience=10)
+model.fit(X_train, y_train, epochs=5, batch_size=50, validation_loss=(X_test, y_test), callbacks=[stopping])
+
+losses = pd.DataFrame(model.history.history)
+losses.plot()
+plt.show()
