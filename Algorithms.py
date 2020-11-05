@@ -1,3 +1,7 @@
+#Pandas locate based on index
+import pandas as pd
+df = pd.read_csv('[name].csv')
+print(df.iloc[[12]]) #Locates everything in index 12
 
 #Make mglearn wave(Not Machine Learning, just useful for future reference)
 import mglearn
