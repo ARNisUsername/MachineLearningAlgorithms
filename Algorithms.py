@@ -92,10 +92,10 @@ print(grid.best_params_)
 model = grid.fit(X_train, y_train)
 
 #K Means Cluserting 
-from sklearn.model_selection import make_blobs
+from sklearn.datasets import make_blobs
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
-data = make_blobs(n_samples=150,n_features=2,centers=4,cluster_std=1.8,random_state=0)
+data = make_blobs(n_samples=150,n_features=2,centers=4,cluster_std=1.8,random_state=0) 
 kmeans = KMeans(n_clusters=4)
 model = kmeans.fit(data[0])
 
