@@ -118,6 +118,7 @@ from tensorflow import keras
 import matplotlib.pyplot as plt
 import pandas as pd
 
+#Basic regression neural network
 model = keras.Sequential()
 model.add(keras.layers.Dense(11, activation='relu'))
 model.add(keras.layers.Dense(11, activation='relu'))
@@ -126,7 +127,26 @@ model.add(keras.layers.Dense(1))
 model.compile(optimizer='adam',loss='mse')
 stopping = keras.callbacks.EarlyStopping(monitor='val_loss',mode='min', verbose=1, patience=10)
 model.fit(X_train, y_train, epochs=5, batch_size=50, validation_loss=(X_test, y_test), callbacks=[stopping])
-
 losses = pd.DataFrame(model.history.history)
 losses.plot()
 plt.show()
+
+#Basic classification neural network
+model = keras.Sequential()
+model.add(keras.layers.Dense(11, activation='relu'))
+model.add(keras.layers.Dense(11, activation='relu'))
+model.add(keras.layers.Dropout(0.2))
+model.add(keras.layers.Dense(3,activation='softmax'))
+model.compile(optimizer='adam',loss='sparse_categorical_crossentropy',metrics=['accuracy'])
+model.fit(X_train, y_train, epochs=5)
+
+#Basic LSTM neural network
+model = keras.Sequential()
+model.add(keras.layers.LSTM(128,input_shape=(28,28),return_sequences=True))
+model.add(keras.layers.LSTM(128))
+model.add(keras.layers.Dropout(0.2))
+model.add(keras.layers.Dense(10,activation='softmax'))
+opt = keras.optimizers.Adam(lr=1e-3,decay=1e-5)
+model.compile(optimizer=opt,loss='sparse_categorical_crossentropy',metrics=['accuracy'])
+model.fit(X_train, y_train, epochs=3, batch_size=100)
+
