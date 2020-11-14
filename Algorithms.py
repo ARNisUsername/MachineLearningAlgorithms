@@ -150,3 +150,15 @@ opt = keras.optimizers.Adam(lr=1e-3,decay=1e-5)
 model.compile(optimizer=opt,loss='sparse_categorical_crossentropy',metrics=['accuracy'])
 model.fit(X_train, y_train, epochs=3, batch_size=100)
 
+#Save a neural network
+model = keras.Sequential()
+model.add(keras.layers.Dense(2,activation='sigmoid'))
+model.compile(optimizer=opt,loss='sparse_categorical_crossentropy',metrics=['accuracy'])
+model.fit(X_train, y_train, epochs=3, batch_size=100)
+model.save_weights("my_good_model")
+
+same_model = keras.Sequential()
+same_model.add(keras.layers.Dense(2,activation='sigmoid'))
+same_model.compile(optimizer=opt,loss='sparse_categorical_crossentropy',metrics=['accuracy'])
+same_model.load_weights("my_good_model")
+
