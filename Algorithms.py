@@ -162,3 +162,42 @@ same_model.add(keras.layers.Dense(2,activation='sigmoid'))
 same_model.compile(optimizer=opt,loss='sparse_categorical_crossentropy',metrics=['accuracy'])
 same_model.load_weights("my_good_model")
 
+#TEXT CLASSIFICATION: Vectorize with sklearn and use Keras
+from sklearn.feature_extraction.text import CountVectorizer
+from tensorflow import keras
+vect = CountVectorizer().fit(X)
+def transform_text(text):
+    text = [text]
+    return list(vect.transform(text).toarray())[0]
+X = np.array([transform_text(text) for text in X])
+y = np.array(y)
+
+max_index = len(vectorizer.vocabulary_)
+the_len = len(transform_text("Test text"))
+dims = 16
+global_pooling = True
+
+model = keras.Sequential()
+model.add(keras.layers.Embedding(input_dim=max_index, output_dim=dims,
+                                 input_length=the_len))
+model.add(keras.layers.Conv1D(filters=32, kernel_size=3, activation='relu',
+                              input_shape=(dims, the_len)))
+model.add(keras.layers.Conv1D(filters=64, kernel_size=3, activation='relu',
+                              input_shape=(dims, the_len)))
+model.add(keras.layers.Dropout(0.2))
+if global_pooling:
+  model.add(keras.layers.GlobalAveragePooling1D())
+else:
+  model.add(keras.layers.BatchNormalization())
+  model.add(keras.layers.Flatten())
+model.add(keras.layers.Dense(128,activation='relu'))
+model.add(keras.layers.Dense(64,activation='relu'))
+model.add(keras.layers.Dropout(0.2))
+model.add(keras.layers.Dense(2,activation='softmax'))
+model.compile(optimizer='adam',loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+model.fit(X, y, epochs=1, batch_size=64)
+
+
+
+
