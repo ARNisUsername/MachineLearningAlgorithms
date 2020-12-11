@@ -9,9 +9,10 @@ def distance_vector(vector1, vector2):
     return np.sqrt(sum(distance_n))
 
 class ManualKNeighbors:
-    def __init__(self, x=None, y=None):
+    def __init__(self, n, x=None, y=None):
         self.x = x
         self.y = y
+        self.n = n
         
     def fit(self, the_x, the_y):
         self.x = the_x
@@ -19,7 +20,20 @@ class ManualKNeighbors:
 
     def predict(self, x_pred):
         all_distances = [distance_vector(x_pred, self.x[i]) for i in range(len(self.x))]
-        return self.y[np.argmin(all_distances)]
+        the_mins = []
+        for i in range(self.n):
+            min_index = np.argmin(all_distances)
+            the_mins.append(self.y[min_index])
+            all_distances.pop(min_index)
+
+        amount = 0
+        the_value = 0
+        for i in range(len(the_mins)):
+            if the_mins.count(the_mins[i]) > amount:
+                amount = the_mins.count(the_mins[i])
+                the_value = the_mins[i]
+
+        return the_value
 
     def predict_multiple(self, x_preds):
         return [self.predict(x_vector) for x_vector in x_preds]
@@ -34,6 +48,6 @@ X = data.data
 y = data.target
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
 
-model = ManualKNeighbors()
+model = ManualKNeighbors(1)
 model.fit(X_train, y_train)
 print(model.accuracy(X_test, y_test))
