@@ -112,6 +112,13 @@ scaler = MinMaxScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
+#Get embedding vectors of document
+from gensim.models import Word2Vec
+sentences = [["Hello there"], ["Hello my friend"], ["Goodbye friend"]]
+model = Word2Vec(sentences, min_count=1)
+vocab = list(model.wv.vocab)
+vector_hello = model["Hello"]
+
 #---------------TENSORFLOW NEURAL NETWORK--------
 import tensorflow as tf
 from tensorflow import keras
