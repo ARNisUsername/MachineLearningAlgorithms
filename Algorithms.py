@@ -119,6 +119,13 @@ model = Word2Vec(sentences, min_count=1)
 vocab = list(model.wv.vocab)
 vector_hello = model["Hello"]
 
+#Save sklearn models
+from sklearn.neighbors import KNeighborsClassifier
+import joblib
+model = KNeighborsClassifier().fit(X, y)
+joblib.dump(model, 'neighbors_model.sav')
+model = joblib.load('neighbors_model.sav')
+
 #---------------TENSORFLOW NEURAL NETWORK--------
 import tensorflow as tf
 from tensorflow import keras
