@@ -212,6 +212,36 @@ model.compile(optimizer='adam',loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 model.fit(X, y, epochs=1, batch_size=64)
 
+#Use tf.GradientTape() for training
+import tensorflow as tf
+import numpy as np
 
+def make_model():
+    model = tf.keras.Sequential([
+        tf.keras.layers.Dense(100, activation='relu'),
+        tf.keras.layers.Dense(1, activation='sigmoid')
+    ])
+    return model
+
+def model_loss(y_true, y_pred):
+  assert len(y_true) == len(y_pred)
+  return sum([(y_true[i] - y_pred[i])**2 for i in range(len(y_true))])/len(y_true)
+
+model = make_model()
+model_optimizer = tf.keras.optimizers.Adam(1e-4)
+def train_step(X, y):
+  with tf.GradientTape() as tape:
+      predictions = list(model(X))
+      loss = model_loss(y, predictions)
+  gradients = tape.gradient(loss, model.trainable_variables)
+  model_optimizer.apply_gradients(zip(gradients, model.trainable_variables))
+    
+def train(X, y, epochs):
+    for i in range(epochs):
+        train_step(X, y)
+        
+def make_prediction(X_pred):
+    X_pred = np.array(X_pred).reshape(-1,1)
+    return list(model.predict(X_pred))
 
 
