@@ -216,32 +216,67 @@ model.fit(X, y, epochs=1, batch_size=64)
 import tensorflow as tf
 import numpy as np
 
+#We will create a 2600 dataset, with the numbers below 1 being correlated to 0, while the numbers above 2 being correlated with 1
+AMOUNT = 1300
+X_1 = list(np.random.rand(AMOUNT,1))
+X_2 = list(np.random.rand(AMOUNT,1)+2)
+X = np.array(X_1 + X_2)
+y = np.array([0 for i in range(AMOUNT)] + [1 for i in range(AMOUNT)])
+
+#Here we will make our model. In this case, this will be a simple 10x1 neural network
 def make_model():
     model = tf.keras.Sequential([
-        tf.keras.layers.Dense(100, activation='relu'),
+        tf.keras.layers.Dense(10, activation='relu'),
         tf.keras.layers.Dense(1, activation='sigmoid')
     ])
     return model
 
+#Our model loss will be Mean Squared Error, and we will create a function to calculate that
 def model_loss(y_true, y_pred):
   assert len(y_true) == len(y_pred)
   return sum([(y_true[i] - y_pred[i])**2 for i in range(len(y_true))])/len(y_true)
 
+#We will create the model with our function, and set the optimizer to a learning rate of 0.1 as it is a small dataset
 model = make_model()
-model_optimizer = tf.keras.optimizers.Adam(1e-4)
+model_optimizer = tf.keras.optimizers.Adam(0.1)
+#This will be the function taken for a single epoch
 def train_step(X, y):
+  #We will use tf.GradientTape and calculate the loss while storing the neccessary info in the tape
   with tf.GradientTape() as tape:
       predictions = list(model(X))
       loss = model_loss(y, predictions)
+  #We will now use the derivatives of our loss function to calculate the gradient between the loss and the model parameters
   gradients = tape.gradient(loss, model.trainable_variables)
+  #Using the optimizer, 'gradients' will have the updated value for each variable, and we will apply them to the optimizer in a 0.1 learning rate
   model_optimizer.apply_gradients(zip(gradients, model.trainable_variables))
     
+#This is the actual train function, which does a train step per epoch
 def train(X, y, epochs):
     for i in range(epochs):
         train_step(X, y)
-        
+
+#This function gives a list of predictions based on a list of X_pred
 def make_prediction(X_pred):
     X_pred = np.array(X_pred).reshape(-1,1)
     return list(model.predict(X_pred))
 
+#A function that can take a sigmoid input and output either 0 or 1
+def do_round(num):
+    if num >= 0.5:
+        return 1
+    return 0
 
+#This is a function where, given amount_test, it will calculate the accuracy of the model 
+def get_acc(amount_test):
+  X_0 = np.random.rand(amount_test,1)
+  X_1 = np.random.rand(amount_test,1)+2
+  y_true = [0 for i in range(amount_test)] + [1 for i in range(amount_test)]
+  y_pred = list(make_predictions(X_0)) + list(make_predictions(X_1))
+  y_pred = [do_round(y_pred[i]) for i in range(len(y_pred))]
+  amount_correct = [y_pred[i] == y_true[i] for i in range(len(y_pred))]
+  return amount_correct.count(True)/len(y_pred)
+
+#We will train our model on 7 epochs and get our accuracy, which should be close to 100%
+train(X, y, 7)
+print(get_acc(300))
+print(make_predictions([0.1,0.2,0.3,0.5,0.9,1.2,1.3,1.8]))
