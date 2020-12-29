@@ -119,6 +119,11 @@ model = Word2Vec(sentences, min_count=1)
 vocab = list(model.wv.vocab)
 vector_hello = model["Hello"]
 
+#Get Embedding Vectors from Stanford Glove Model, and get matrix
+from gensim.models import KeyedVectors
+embeddings = KeyedVectors.load("glove_model.model")
+matrix = model.wv.syn0
+
 #Save sklearn models
 from sklearn.neighbors import KNeighborsClassifier
 import joblib
