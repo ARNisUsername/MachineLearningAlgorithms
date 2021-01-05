@@ -131,6 +131,16 @@ model = KNeighborsClassifier().fit(X, y)
 joblib.dump(model, 'neighbors_model.sav')
 model = joblib.load('neighbors_model.sav')
 
+#Make text generation models have variety
+def temp_softmax(preds, temperature):
+    preds = np.asarray(preds).astype('float64')
+    preds = np.ravel(preds)
+    preds = np.log(preds) / temperature
+    exp_preds = np.exp(preds)
+    preds = exp_preds / np.sum(exp_preds)
+    probas = np.random.multinomial(1, preds, 1)
+    return np.argmax(probas)
+
 #---------------TENSORFLOW NEURAL NETWORK--------
 import tensorflow as tf
 from tensorflow import keras
