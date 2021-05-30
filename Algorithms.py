@@ -133,8 +133,7 @@ model = joblib.load('neighbors_model.sav')
 
 #Make text generation models have variety
 def temp_softmax(preds, temperature):
-    preds = np.asarray(preds).astype('float64')
-    preds = np.ravel(preds)
+    preds = np.asarray(np.ravel(preds)).astype('float64')
     preds = np.log(preds) / temperature
     exp_preds = np.exp(preds)
     preds = exp_preds / np.sum(exp_preds)
